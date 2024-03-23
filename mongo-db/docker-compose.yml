@@ -1,0 +1,15 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo-db
+    restart: always
+    ports:
+      - '${FORWARD_DB_PORT:-27017}:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: '${DB_USER}'
+      MONGO_INITDB_ROOT_PASSWORD: '${DB_PASSWORD}'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+volumes:
+    mongo-data:
+        driver: local
